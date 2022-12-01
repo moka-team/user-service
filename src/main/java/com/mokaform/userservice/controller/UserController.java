@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +29,30 @@ import javax.validation.Valid;
 
 @Tag(name = "유저", description = "유저 관련 API입니다.")
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/moka-user")
 public class UserController {
 
     private final UserService userService;
     private final JwtService jwtService;
     private final EmailService emailService;
 
+    private Environment env;
+
     public UserController(UserService userService,
                           JwtService jwtService,
-                          EmailService emailService) {
+                          EmailService emailService,
+                          Environment env) {
         this.userService = userService;
         this.jwtService = jwtService;
         this.emailService = emailService;
+        this.env = env;
+    }
+
+    @GetMapping("/health_check")
+    public String status(){
+        return String.format("It's working in MOKA User Service"
+                + ", port(local.server.port) = " + env.getProperty("local.server.port")
+                + ", port(server.port) = " + env.getProperty("server.port"));
     }
 
     @Operation(summary = "회원가입", description = "회원가입 API입니다.")
