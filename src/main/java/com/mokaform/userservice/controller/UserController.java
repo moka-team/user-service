@@ -29,7 +29,7 @@ import javax.validation.Valid;
 
 @Tag(name = "유저", description = "유저 관련 API입니다.")
 @RestController
-@RequestMapping("/moka-user")
+@RequestMapping("/user-service")
 public class UserController {
 
     private final UserService userService;
