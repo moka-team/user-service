@@ -1,0 +1,7 @@
+jwt:
+  issuer: test
+  client-secret: TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTAwTEST
+  access-token-header: accessToken
+  access-token-expiry-seconds: 90
+  refresh-token-header: refreshToken
+  refresh-token-expiry-seconds: 180
